@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.1415926-1.40.9 (Web2C 7.5.7) (format=pdflatex 2008.12.28)  27 JUN 2011 12:12
+This is pdfTeXk, Version 3.1415926-1.40.9 (Web2C 7.5.7) (format=pdflatex 2008.12.28)  27 JUN 2011 23:12
 entering extended mode
  file:line:error style messages enabled.
  %&-line parsing enabled.
@@ -271,25 +271,26 @@ File: hpdftex.def 2009/02/22 v6.78p Hyperref driver for pdfTeX
 \@float@every@Program=\toks20
 \c@Program=\count108
 
-No file thesis.aux.
+(./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 289.
-LaTeX Font Info:    ... okay on input line 289.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 289.
-LaTeX Font Info:    ... okay on input line 289.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 289.
-LaTeX Font Info:    ... okay on input line 289.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 289.
-LaTeX Font Info:    ... okay on input line 289.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 289.
-LaTeX Font Info:    ... okay on input line 289.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 289.
-LaTeX Font Info:    ... okay on input line 289.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 289.
-LaTeX Font Info:    ... okay on input line 289.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 289.
-LaTeX Font Info:    ... okay on input line 289.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 275.
+LaTeX Font Info:    ... okay on input line 275.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 275.
+LaTeX Font Info:    ... okay on input line 275.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 275.
+LaTeX Font Info:    ... okay on input line 275.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 275.
+LaTeX Font Info:    ... okay on input line 275.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 275.
+LaTeX Font Info:    ... okay on input line 275.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 275.
+LaTeX Font Info:    ... okay on input line 275.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 275.
+LaTeX Font Info:    ... okay on input line 275.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 275.
+LaTeX Font Info:    ... okay on input line 275.
+
 (/usr/local/texlive/2008/texmf-dist/tex/context/base/supp-pdf.tex
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count109
@@ -303,7 +304,7 @@ LaTeX Font Info:    ... okay on input line 289.
 \MPnumerator=\count113
 \everyMPtoPDFconversion=\toks22
 )
-Package hyperref Info: Link coloring OFF on input line 289.
+Package hyperref Info: Link coloring OFF on input line 275.
  (/usr/local/texlive/2008/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
@@ -312,21 +313,23 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 \c@section@level=\count114
 )
-LaTeX Info: Redefining \ref on input line 289.
-LaTeX Info: Redefining \pageref on input line 289.
+LaTeX Info: Redefining \ref on input line 275.
+LaTeX Info: Redefining \pageref on input line 275.
+
+(./thesis.out) (./thesis.out)
 \@outlinefile=\write4
 \openout4 = `thesis.out'.
 
 \AtBeginShipoutBox=\box35
 \@orgargctr=\count115
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 305.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 290.
 
 
 (/usr/local/texlive/2008/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 305.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 290.
 \@orgargctr=\count116
 \@orgargctr=\count117
 \@orgargctr=\count118
@@ -339,41 +342,34 @@ Non-PDF special ignored!
 {/usr/local/texlive/2008/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
 
 
-]
-
-LaTeX Warning: Reference `cha:apple_ref' on page iii undefined on input line 33
-8.
-
-
-LaTeX Warning: Reference `cha:apple_ref' on page iii undefined on input line 34
-4.
-
-
-Package natbib Warning: Citation `Apple:2010' on page iii undefined on input li
-ne 345.
-
-[3
+] (./thesis.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 1.
+ [3
 
 
-]
+])
 \tf@toc=\write5
 \openout5 = `thesis.toc'.
 
- [4
-
-]
+ [4] (./thesis.lot)
 \tf@lot=\write6
 \openout6 = `thesis.lot'.
 
  [5
 
-]
+] (./thesis.lof)
 \tf@lof=\write7
 \openout7 = `thesis.lof'.
 
- [6
 
-]
+[6
+
+] (./thesis.lop)
 \tf@lop=\write8
 \openout8 = `thesis.lop'.
 
@@ -384,59 +380,68 @@ ne 345.
 ] [9
 
 ]
-No file thesis.bbl.
+Chapter 1.
 [1
 
 
-
-] [2
+]
+Chapter 2.
+[2
 
 ]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 422.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 422.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 422.
-
-Overfull \hbox (14.43346pt too wide) in paragraph at lines 426--433
-\OT1/cmr/m/n/10.95 pro-duce a well for-mat-ted doc-u-ment that meets the FoGS r
-e-quire-ment. Notwith-
- []
-
-
-Overfull \hbox (61.65685pt too wide) in paragraph at lines 439--444
- [] 
- []
-
-
-Package natbib Warning: There were undefined citations.
-
+Chapter 3.
 [3
 
-] (./thesis.aux)
+]
+Chapter 4.
+[4
 
-LaTeX Warning: There were undefined references.
+]
+Overfull \hbox (8.22469pt too wide) in paragraph at lines 386--387
+[]\OT1/cmr/m/n/10.95 FieldVisitor ac-ceptVis-i-tor(FieldVisitor) - Ac-cepts the
+ field vis-i-tors which
+ []
 
- ) 
+[5] <./images/schema-reference.png, id=212, 515.9275pt x 233.87375pt>
+File: ./images/schema-reference.png Graphic file (type png)
+
+<use ./images/schema-reference.png> [6 <./images/schema-reference.png>]
+[7]
+Chapter 5.
+[8
+
+]
+Chapter 6.
+No file thesis.bbl.
+[9
+
+]
+Overfull \hbox (53.07281pt too wide) in alignment at lines 493--519
+[][][]
+ []
+
+[10
+
+
+] [11] [12
+
+] (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 6375 strings out of 493876
- 86614 string characters out of 1150567
- 152764 words of memory out of 3000000
- 9569 multiletter control sequences out of 10000+50000
- 9018 words of font info for 32 fonts, out of 3000000 for 5000
+ 6474 strings out of 493876
+ 88080 string characters out of 1150567
+ 155801 words of memory out of 3000000
+ 9625 multiletter control sequences out of 10000+50000
+ 9462 words of font info for 33 fonts, out of 3000000 for 5000
  714 hyphenation exceptions out of 8191
- 36i,9n,28p,561b,318s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmbx10.pfb></usr/l
-ocal/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmbx12.pfb></usr/local/texl
-ive/2008/texmf-dist/fonts/type1/bluesky/cm/cmr10.pfb></usr/local/texlive/2008/t
-exmf-dist/fonts/type1/bluesky/cm/cmr8.pfb></usr/local/texlive/2008/texmf-dist/f
-onts/type1/bluesky/cm/cmsy10.pfb></usr/local/texlive/2008/texmf-dist/fonts/type
-1/bluesky/cm/cmti10.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky
-/cm/cmtt10.pfb>
-Output written on thesis.pdf (12 pages, 57395 bytes).
+ 36i,9n,37p,1285b,341s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cm
+bx10.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmbx12.pfb>
+</usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmr10.pfb></usr/loca
+l/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmsl10.pfb></usr/local/texlive
+/2008/texmf-dist/fonts/type1/bluesky/cm/cmsy10.pfb>
+Output written on thesis.pdf (21 pages, 111047 bytes).
 PDF statistics:
- 106 PDF objects out of 1000 (max. 8388607)
- 25 named destinations out of 1000 (max. 131072)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 275 PDF objects out of 1000 (max. 8388607)
+ 52 named destinations out of 1000 (max. 131072)
+ 234 words of extra memory for PDF output out of 10000 (max. 10000000)
 
