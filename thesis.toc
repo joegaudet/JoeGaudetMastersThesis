@@ -11,18 +11,17 @@
 \contentsline {chapter}{\numberline {4}{Design and Modelling}}{4}{chapter.4}
 \contentsline {section}{\numberline {4.1}{Overview}}{4}{section.4.1}
 \contentsline {section}{\numberline {4.2}{A Framework for Data Migration}}{4}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}{Remote Method Invocation}}{4}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}{Data Serialization}}{4}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}{Result Serialization}}{7}{subsection.4.2.3}
-\contentsline {section}{\numberline {4.3}{Programmer Responsibilities}}{7}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}{Annotation}}{7}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}{Parallelization}}{7}{subsection.4.3.2}
-\contentsline {section}{\numberline {4.4}{The Model}}{7}{section.4.4}
-\contentsline {section}{\numberline {4.5}{Exercising the Framework}}{7}{section.4.5}
-\contentsline {chapter}{\numberline {5}{Experimental Results}}{8}{chapter.5}
-\contentsline {chapter}{\numberline {6}{Conclusion}}{9}{chapter.6}
-\contentsline {section}{\numberline {6.1}{Summary of Contribution}}{9}{section.6.1}
-\contentsline {section}{\numberline {6.2}{Future Work}}{9}{section.6.2}
+\contentsline {subsection}{\numberline {4.2.1}{Dynamic Proxies}}{4}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}{Result Serialization}}{8}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}{Programmer Responsibilities}}{8}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}{Annotation}}{8}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}{Parallelization}}{8}{subsection.4.3.2}
+\contentsline {section}{\numberline {4.4}{The Model}}{8}{section.4.4}
+\contentsline {section}{\numberline {4.5}{Exercising the Framework}}{8}{section.4.5}
+\contentsline {chapter}{\numberline {5}{Experimental Results}}{9}{chapter.5}
+\contentsline {chapter}{\numberline {6}{Conclusion}}{10}{chapter.6}
+\contentsline {section}{\numberline {6.1}{Summary of Contribution}}{10}{section.6.1}
+\contentsline {section}{\numberline {6.2}{Future Work}}{10}{section.6.2}
 \contentsline {part}{{Appendices}}{}{}
-\contentsline {chapter}{{First Appendix}}{10}{appendix*.9}
-\contentsline {chapter}{{Second Appendix}}{12}{appendix*.10}
+\contentsline {chapter}{{First Appendix}}{11}{appendix*.11}
+\contentsline {chapter}{{Second Appendix}}{13}{appendix*.12}

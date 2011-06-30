@@ -237,7 +237,7 @@
 \degreetitle{Masters of Applied Science}
 
 % These commands are required.
-\title{A Sample UBC Thesis} \subtitle{With a Subtitle} 
+\title{mHot} \subtitle{Mobile Here or There - A framework for runtime offloading of computation from mobile devices to the cloud.} 
 \author{William Joseph Gaudet} \copyrightyear{2011} \submitdate{\monthname\ \number\year} 
 
 % The "\ " is required after
@@ -357,17 +357,30 @@
 
 % section overview (end)
 \section{A Framework for Data Migration} 
-
-% (fold)
 \label{sec:a_framework_for_data_migration}
 
-\subsection{Remote Method Invocation} 
+
+\subsection{Dynamic Proxies} % (fold)
+\label{sub:dynamic_proxies}
+
+The primary mechanism for abstracting the decision of where to execute a method (in the cloud or on the mobile device) is the Java Dynamic Proxy class [citation]. The dynamic proxy class enables runtime proxing of any object provided it implements an interface. A dynamic proxy object then implements the interface of the object to be proxied at runtime, and then routes all method calls through its invoke method. It is in this invoke method that the decision to either package the object graph and ship it to the server for execution or execute locally is made. 
+
+The dynamic proxy class does have some shortcomings, it requires developers to create interfaces for the methods they want to to be remotable, additionally the developer must explicitly create the proxy objects for use in their code, and finally dynamic proxies do incur a performance overhead. Simple running time experiments show that the average time cost of a regular Java method invocation is approximately 60ns while the average time cost of the same method invocation done through a dynamic proxy object is around 5ms. However with these costs in mind a developer can make architectural decisions to help mitigate these performance overheads. The shortcomings with respect to the use of interfaces is actually viewed as a positive as it forces the developer towards best practices of programming to interfaces and not implementation. Finally steps have been taken to mitigate developer pain with regards to creation and use of dynamic proxies, by way of the Java Generics system every object which descends from the AbstractRemoteObject has a factory method which will wrap the object in a proxy.
+
+% subsection dynamic_proxies (end)
 
 % (fold)
+
+\subsection*{Remote Method Invocation} 
 \label{sub:remote_method_invocation}
 
+If mHot determines that a method should be executed in the cloud rather than locally on the mobile device, it must conduct a remote method invocation. While it takes its name from the Java RMI system, the remote method invocation object is only related to RMI in the fact that it allows for a developer to remotely invoke methods on an object. When mHot was first designed RMI was investigated as a potential solution to the problem of object transmission and method invocation, however the lack of support for native RMI in the Android platform was seen as an insurmountable barrier. As such, a custom remote invocation methodology was devised with a goal in mind to minimize both the amount of computation required to marshal the objects between the compute platforms and limit the amount of data that would be transmitted over the wire---this is particularly important due to battery life constraints and the substantial energy costs of the high bandwidth radios (3g / WiFi).
+
+A single remote invocation is a collaboration between three objects, the target remoteable object, the argument array, and the result. Each object plays a particular role in the method invocation process, and together make up the composition of a RemoteInvocationMethod object. The target remoteable object is the object against which the method will be invoked, the argument array contains facilities for serializing and deserializing the arguments the method takes---these objects must be either primitive data types, or implement RemoteableObject otherwise an exception will be thrown---, finally the result is container for the returned result of the method---presently the method should not mutate the target object's state as mHot has no facilities for returning the object once it's been shipped to the remote server, thus the developer must currently take that into account when designing their apis.
+% (fold)
+
 % subsection remote_method_invocation (end)
-\subsection{Data Serialization} 
+\subsection*{Data Serialization} 
 
 % (fold)
 \label{sub:data_serialization}
