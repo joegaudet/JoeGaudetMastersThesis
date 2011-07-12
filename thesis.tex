@@ -331,12 +331,34 @@
 
 % (fold)
 \label{chap:introduction}
+\subsection*{Motivations} % (fold)
+\label{sub:motivations}
+
+Desktop and laptop computers have been the mainstay of personal computing for more than 30 years, providing untold utility to millions of users world wide. However,  with the recent improvements in battery technology paired with reduction in size and cost of all the components necessary to build a computer system industry leaders are declaring the "Death of the PC" and the subsequent rise of the mobile platform---Mobile is taken to mean smartphones and tablet computers, excluding laptops. At the all things digital conference 2011 Steve Jobs Founder and CEO of Apple echoed this sentiment, stating that Personal Computers (PCs) would become like trucks, they will still exists but the bulk of people won't need them.
+
+This new era of mobile computing has additionally given rise to a suite of new mobile applications, with the average smartphone boasting the equivalent computational capability of a PC from 2001, the potential for innovative new applications seems limitless---this is aided by the many environmental sensors present on the typical smart phone such as position / orientation / acceleration sensors.
+
+There is however a second class of application that requires significantly greater capabilities than are offered by the current generation of mobile platforms. An example of this class of application include music recognition programs such as Shazam [CITATION] which require a large corpus of music against which to compare the audio sample, additionally the digital signal processing requirements are likely greater than the capabilities of the mobile device (or they process would be prohibitively non performant on the mobile device). In spite of these limitations, these applications exist and provide a great deal of utility to the end user. The shortcomings of the mobile devices are addressed through the offloading of the more challenging computational work to a computer with greater resources and capabilities at its disposal---This process will henceforth be referred to computational offloading. The benefits of computational offloading are seemingly obvious; providing the user the facade of having a more performant computer than they already have. In fact computation offload is not a new idea, search systems such as Google can be viewed as computational offloading systems. Whereby the user provides a search string into the google web portal, which has significantly more capabilities and data at its disposal, and google returns a listing of search results.
+
+Currently if a developer wants to add some computational offloading to their mobile application, they must explicitly construct their own method for offloading their data structures, additionally they must construct a remote runtime to accept the offloaded data, execute the remote operations, and return the results. This gives rise to a large number of potential problems for a developer. There are many parameters which must be considered when offloading computation, not the least of which is the bandwidth of the remote connection. In a mobile scenario there is a delicate balance between the bit rate of the connection and the power consumption costs (watts/byte) which must be considered when determining the value of a computation offload.
+
+The goal of this work is two fold, to identify all of the parameters which must be taken into account in order to efficiently offload computation, and to develop and describe a framework for the android mobile platform which limits the cognitive overhead for the developer when creating these mobile applications. 
+
+% subsection motivations (end)
+
+\subsection*{Efficient Offloading} % (fold)
+\label{sub:efficient_offloading}
+Efficient offloading is measured from two perspectives: minimized runtime, and maximized quality.
+% subsection efficient_offloading (end)
+
+\subsection*{Development Overhead} % (fold)
+\label{sub:development_overhead}
+
+Minimizing the cognitive overhead of developers is the goal of most development frameworks, reducing the amount of work a developer has to do both in lines of code and in adjusting their mental picture of a problem in order to solve it is in general viewed as desirable. The design of this framework has limited the amount of input from the developer to a sole annotation on a method, the use of some custom data structures when building their domain objects, and the following of some development best practices. These will all be described at length in the design and implementation section of this document.
+
+% subsection development_overhead (end)
 
 % chapter introduction (end)
-\chapter{Background} 
-
-% (fold)
-\label{chap:background}
 
 % chapter background (end)
 \chapter{Literature Review} 
@@ -359,7 +381,6 @@
 \section{A Framework for Data Migration} 
 \label{sec:a_framework_for_data_migration}
 
-
 \subsection{Dynamic Proxies} % (fold)
 \label{sub:dynamic_proxies}
 
@@ -374,9 +395,17 @@ The dynamic proxy class does have some shortcomings, it requires developers to c
 \subsection*{Remote Method Invocation} 
 \label{sub:remote_method_invocation}
 
-If mHot determines that a method should be executed in the cloud rather than locally on the mobile device, it must conduct a remote method invocation. While it takes its name from the Java RMI system, the remote method invocation object is only related to RMI in the fact that it allows for a developer to remotely invoke methods on an object. When mHot was first designed RMI was investigated as a potential solution to the problem of object transmission and method invocation, however the lack of support for native RMI in the Android platform was seen as an insurmountable barrier. As such, a custom remote invocation methodology was devised with a goal in mind to minimize both the amount of computation required to marshal the objects between the compute platforms and limit the amount of data that would be transmitted over the wire---this is particularly important due to battery life constraints and the substantial energy costs of the high bandwidth radios (3g / WiFi).
+When mHot determines that a method should be executed in the cloud rather than locally on the mobile device, it must conduct a remote method invocation. While it takes its name from the Java RMI system, the remote method invocation object is only related to RMI in the fact that it allows for a developer to remotely invoke methods on an object. The Java RMI system is a fully feature interprocess communication system and as such when mHot was first designed RMI was investigated as a potential solution to the problem of object transmission and method invocation. However, the lack of support for native RMI in the Android platform was seen as an insurmountable barrier. As such, a custom and lightweight remote invocation methodology was devised with a goal in mind to minimize both the amount of computation required to marshal the objects between the compute platforms and limit the amount of data that would be transmitted over the wire---this is particularly important due to battery life constraints and the substantial energy costs of the high bandwidth radios (3g / WiFi).
 
-A single remote invocation is a collaboration between three objects, the target remoteable object, the argument array, and the result. Each object plays a particular role in the method invocation process, and together make up the composition of a RemoteInvocationMethod object. The target remoteable object is the object against which the method will be invoked, the argument array contains facilities for serializing and deserializing the arguments the method takes---these objects must be either primitive data types, or implement RemoteableObject otherwise an exception will be thrown---, finally the result is container for the returned result of the method---presently the method should not mutate the target object's state as mHot has no facilities for returning the object once it's been shipped to the remote server, thus the developer must currently take that into account when designing their apis.
+A single remote invocation is a collaboration between three objects, the target remotable object, the argument array, and the result. Each object plays a particular role in the method invocation process, and together make up the composition of a RemoteInvocationMethod object. The target remotable object is the object against which the method will be invoked, the argument array contains facilities for serializing and deserializing the arguments the method takes---these objects must be either primitive data types, or implement RemoteableObject otherwise an exception will be thrown---, finally the result is container for the returned result of the method. The remote method invocation process is performed by the Remote Dynamic Proxy Object, this process is outlined in the activity diagram shown in Figure \ref{fig:RMI-Activity-Diagram}. Presently the remoted method should not mutate the target object's state as mHot has no facilities for returning the object once it's been shipped to the remote server, thus the developer must currently take that into account when designing their APIs. However this could reasonably be addressed via some post execution synchronization mechanism, or by returning the mutated object as the result---though this would be a poor stop gap solution as it would increase the amount of traffic on the line.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{RMI-Activity-Diagram}
+	\caption{An Activity Diagram showing the RMI invocation process}
+	\label{fig:RMI-Activity-Diagram}
+\end{figure}
+
 % (fold)
 
 % subsection remote_method_invocation (end)
@@ -406,43 +435,35 @@ This is primarily done by the encapsulation of an object's fields in container o
 
 The object serialization process is a modified depth first search. In effect the process visits every node in the graph twice, once to compute the overall size required to encode the graph as a binary representation, and a second time to perform the serialization it self. [This is a potential future work situation, some of this could probably be improved]. 
 
-When a object in the graph is visited by the size computation pass, each of the object's remoteable fields are interrogated for their serialization size---It should be noted that the fields for each object class are stored in a memoization cache to prevent recalculation of the classes' remoteable fields through the use of the Java reflection APIs which are not very performant [Maybe this should be a footnote probably needs a citation]. If the field encapsulates a primitive field it simply looks up the serialization cost for that field which is it's data size in addition to the field reference, however, if the field encapsulates a remotable object it either adds 8 bytes if it has been visited once before---the byte cost of referencing an object which has already been visited---or it adds 8 bytes plus the serialization cost of that object, which is computed immediately---A complete list of default data type serialization costs is shown in \ref{tab:field_sizes}. The size cost of an object is computed by adding the length of the fully qualified class name (eq: com.someCompany.somePackage.someClass) to the size of the serialized data including referenced object sizes to 8 bytes---4 for the entire schema size, 4 for the first object size.
+When a object in the graph is visited by the size computation pass, each of the object's remotable fields are interrogated for their serialization size---It should be noted that the fields for each object class are stored in a memoization cache to prevent recalculation of the classes' remotable fields through the use of the Java reflection APIs which are not very performant [Maybe this should be a footnote probably needs a citation]. If the field encapsulates a primitive field it simply looks up the serialization size cost for that field which is its data size in addition to the field reference, however, if the field encapsulates a remotable object it either adds 8 bytes if it has been visited once before---the byte cost of referencing an object which has already been visited---or it adds 8 bytes plus the serialization cost of that object, which is computed immediately---A complete list of default data type serialization costs is shown in \ref{tab:field_sizes}. The size cost of an object is computed by adding the length of the fully qualified class name (eq: com.someCompany.somePackage.someClass) to the size of the serialized data including referenced object sizes to 8 bytes---4 for the entire schema size, 4 for the first object size.
 
-On the second traversal of the object graph each object is serialized by calling each of it's field's serialize method. This method creates a binary representation of the data which can later be decoded to reproduce the same values---The put and get methods on the Java ByteBuffer class handle the serialization of primitive data types into their byte representations. A primitive field is serialized as a tuple of the hash value of the string representation of it's name and it's value. The hash value is used to reduce the size and complexity of the encoding. Given that a string of arbitrary length will have a unique hash code, this means that every field can be key value encoded with an integer for a key. This means the field can be encoded as the length of the field representation (including the length of the length), the hash code of the field name, and the value of the field. ObjectFields---that is fields which reference remote objects---are represented as a length, field name hash code, and the hash code of the object they reference, the object it self is added to a queue of objects to be serialized. The serialized object representation after the serialization has completed is shown in Figure \ref{fig:schema-representation}
+On the second traversal of the object graph each object is serialized by calling each of its fields serialize method. This method creates a binary representation of the data which can later be decoded to reproduce the same values---The put and get methods on the Java ByteBuffer class handle the serialization of primitive data types into their byte representations. A primitive field is serialized as a tuple of the hash value of the string representation of it's name and it's value. The hash value is used to reduce the size and complexity of the encoding. Given that a unique string of arbitrary length will have a unique hash code, this allows each field to be key value encoded with a 4 byte integer for the code. As such a single field is be represented by a 3 tuple of the length of the field representation (including the length of the length of the length which is a 4 byte integer), the hash code of the field name, and the value of the field. ObjectFields---that is fields which reference remote objects---are represented as a length, field name hash code, and the hash code of the object they reference, the object it self is added to a queue of objects to be serialized. The general form of a serialized remote object post serialization has completed is shown in Figure \ref{fig:schema-representation}
 
-\begin{figure}[h!]
-	\includegraphics[width=1\textwidth]{schema-reference}
-	\caption{The data outline for the serialized data}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\textwidth]{schema-reference}
+	\caption{The general form of serialized RemoteObjects}
 	\label{fig:schema-representation}
 \end{figure}
 
 % subsection the_serialization_process (end)
-% subsection data_serialization (end)
-\subsection{Result Serialization} 
 
-% (fold)
-\label{sub:result_serialization}
+\subsection{Remote Compute Service} % (fold)
+\label{sub:remote_compute_service}
 
-% subsection result_serialization (end)
+The remote compute service (RCS) is a simple socket server and key value store, that runs on the cloud compute platform. It's primary task is to listen for incoming invocation requests, upon receipt of a request it deserializes the target object and the argument array. These deserialized objects are synchronized with the local cache of remoted objects---Objects are sent as deltas only to prevent retransmission of information. Once the cache is synchronized the method is invoked against the target object with the argument array, and the result is in turn serialized and transmitted to the mobile device.
+
+Deserialization is relatively straightforward, however it requires the RCS to have access to all of the class files that represent the objects that have been transmitted. This is done by simply jarring all pertinent files and having them present in the /jars folder which is located at the root of the classpath of the RCS. A single object is deserialized by loading it's class by name, and reflectively instantiating it. This requires that all RemoteObject have a null constructor (an constructor with no arguments). After which fields are looked up by the hash value of their field name and set to the serialized value.
+
+% subsection remote_compute_service (end)
+
 % section a_framework_for_data_migration (end)
+
 \section{Programmer Responsibilities} 
-
 % (fold)
-\label{sec:programmer_responsibilities}
 
-\subsection{Annotation} 
-
-% (fold)
-\label{sub:annotation}
-
-% subsection annotation (end)
-\subsection{Parallelization} 
-
-% (fold)
-\label{sub:parallelization}
-
-% subsection parallelization (end)
 % section programmer_responsibilities (end)
+
 \section{The Model} 
 
 % (fold)
@@ -450,6 +471,14 @@ On the second traversal of the object graph each object is serialized by calling
 
 % section the_model (end)
 \section{Exercising the Framework} 
+
+
+\subsection{Basic Experiment} % (fold)
+\label{sub:basic_experiment}
+
+The first and most simple experiment will be used to determine if it is possible to obtain more than marginal gains in terms of battery life and computation time (over all number of computations executed in the given battery life) using a non heuristically or stochastically based model, but rather by simply shipping the computation off to a server with greater capabilities. 
+
+% subsection basic_experiment (end)
 
 % (fold)
 \label{sec:exercising_the_framework}

@@ -8,8 +8,8 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces The data outline for the serialized data}}{8}{figure.4.1}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces An Activity Diagram showing the RMI invocation process}}{6}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces The general form of serialized RemoteObjects}}{9}{figure.3.2}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
