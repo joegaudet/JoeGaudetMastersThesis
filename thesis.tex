@@ -334,22 +334,40 @@
 \subsection*{Motivations} % (fold)
 \label{sub:motivations}
 
-Desktop and laptop computers have been the mainstay of personal computing for more than 30 years, providing untold utility to millions of users world wide. However,  with the recent improvements in battery technology paired with reduction in size and cost of all the components necessary to build a computer system industry leaders are declaring the "Death of the PC" and the subsequent rise of the mobile platform---Mobile is taken to mean smartphones and tablet computers, excluding laptops. At the all things digital conference 2011 Steve Jobs Founder and CEO of Apple echoed this sentiment, stating that Personal Computers (PCs) would become like trucks, they will still exists but the bulk of people won't need them.
+Desktop and laptop computers have been the mainstay of personal computing for more than 30 years, providing untold utility to millions of users worldwide. However, due to recent improvements in battery technology paired with reduction in size and cost of the components necessary to build a computer system, industry leaders are declaring the "Death of the PC" and subsequent rise of mobile platforms, referring to smartphones and tablet computers rather than laptops. At the All Things Digital Conference 2010 Steve Jobs, founder and CEO of Apple, echoed this sentiment, stating that Personal Computers (PCs) would become like trucks: they will still exist but the bulk of people won't need them.
 
-This new era of mobile computing has additionally given rise to a suite of new mobile applications, with the average smartphone boasting the equivalent computational capability of a PC from 2001, the potential for innovative new applications seems limitless---this is aided by the many environmental sensors present on the typical smart phone such as position / orientation / acceleration sensors.
+Additionally, this new era of pervasive mobile computing has given rise to a suite of new mobile applications, with the average smartphone boasting the equivalent computational capability of a PC from 2001, the potential for innovative new applications seems limitless---this is aided by the many environmental sensors present on the typical smart phone such as those which measure position, orientation, and acceleration.
 
-There is however a second class of application that requires significantly greater capabilities than are offered by the current generation of mobile platforms. An example of this class of application include music recognition programs such as Shazam [CITATION] which require a large corpus of music against which to compare the audio sample, additionally the digital signal processing requirements are likely greater than the capabilities of the mobile device (or they process would be prohibitively non performant on the mobile device). In spite of these limitations, these applications exist and provide a great deal of utility to the end user. The shortcomings of the mobile devices are addressed through the offloading of the more challenging computational work to a computer with greater resources and capabilities at its disposal---This process will henceforth be referred to computational offloading. The benefits of computational offloading are seemingly obvious; providing the user the facade of having a more performant computer than they already have. In fact computation offload is not a new idea, search systems such as Google can be viewed as computational offloading systems. Whereby the user provides a search string into the google web portal, which has significantly more capabilities and data at its disposal, and google returns a listing of search results.
+There is however a second class of application that requires significantly greater capabilities than are offered by the current generation of mobile platforms. An example of this class of application include music recognition programs such as Shazam [CITATION] which requires a large corpus of music against which to compare an audio sample, additionally the digital signal processing requirements are likely greater than the capabilities of the mobile device (or they process would be prohibitively non performant on the mobile device). In spite of these limitations, these applications exist and provide a great deal of utility to the end user. The shortcomings of the mobile devices are addressed through the offloading of the more challenging computational work to a computer with greater resources and capabilities at its disposal---This process will henceforth be referred to computational offloading. The benefits of computational offloading are seemingly obvious; providing the user the facade of having a more performant computer than they already have. In fact computation offload is not a new idea, search systems such as Google can be viewed as computational offloading systems. Whereby the user provides a search string into the google web portal, which has significantly more capabilities and data at its disposal, and google returns a listing of search results.
 
-Currently if a developer wants to add some computational offloading to their mobile application, they must explicitly construct their own method for offloading their data structures, additionally they must construct a remote runtime to accept the offloaded data, execute the remote operations, and return the results. This gives rise to a large number of potential problems for a developer. There are many parameters which must be considered when offloading computation, not the least of which is the bandwidth of the remote connection. In a mobile scenario there is a delicate balance between the bit rate of the connection and the power consumption costs (watts/byte) which must be considered when determining the value of a computation offload.
+Currently if a developer wants to add some computational offloading to their mobile application, they must explicitly construct their own method for offloading their data structures, additionally they must engineer a remote runtime to accept the offloaded data, execute the remote operations, and return the results to the mobile device. This gives rise to a large number of potential problems for a developer. There are many parameters which must be considered when offloading computation, not the least of which is the bandwidth of the remote connection. In a mobile scenario there is a delicate balance between the bit rate of the connection and the power consumption costs (watts/byte) which must be considered when determining the value of a computation offload. Often times these complexities give rise to incomplete or inefficient solutions, as the developer may lack the experience and skill to create a reasonable offloading system.
 
-The goal of this work is two fold, to identify all of the parameters which must be taken into account in order to efficiently offload computation, and to develop and describe a framework for the android mobile platform which limits the cognitive overhead for the developer when creating these mobile applications. 
-
+The goal of this work is two fold, to identify the critical parameters which must be taken into account in order to develop a decision model for offloading computation, and to describe and implement a framework for the android mobile platform which limits the cognitive overhead for the developer when creating mobile applications which require computation offloading. 
 % subsection motivations (end)
 
-\subsection*{Efficient Offloading} % (fold)
-\label{sub:efficient_offloading}
-Efficient offloading is measured from two perspectives: minimized runtime, and maximized quality.
-% subsection efficient_offloading (end)
+\subsection{Decision Goals} % (fold)
+\label{sub:decision_goals}
+The decision model described in this work will focus around three goals, minimizing runtime, maximizing computation 'quality', and maximizing battery life. Minimizing runtime is a fairly straightforward goal, the decision to offload computation can be made trivially by predicting the which platform will have the lowest runtime (the following equation is used).
+
+\begin{equation}
+	min(T_{compRemote} + T_{transmission}, T_{compLocal})
+\end{equation}
+ 
+Computation quality is considered in a special case of problem, where an increased number of iterations of a particular problem would increase the correctness of a solution. An example of this would be an iterative root finding method, where more iterations would lead to a more correct result (a value closer to the actual root). In the case of a mobile computation offloading situation, one could reason that if a problem were executed in the same approximate running time but on server with increased capabilities the over all quality of the computation could be increased. Or put a different way, given a boundary of some level of quality of result, the running time could be minimized.
+
+\begin{equation}
+	min(T_{compRemoteToQuality(q)} + T_{transmission}, T_{compLocalToQuality(q)})
+\end{equation}
+
+Finally in general the goal of reducing battery life can be expressed simply as:
+
+\begin{equation}
+	min(P_{compLocal}, P_{transmission})
+\end{equation}
+
+where P is the cost in watts of a particular operation.
+
+% subsection decision_goals (end)
 
 \subsection*{Development Overhead} % (fold)
 \label{sub:development_overhead}
@@ -360,11 +378,14 @@ Minimizing the cognitive overhead of developers is the goal of most development 
 
 % chapter introduction (end)
 
-% chapter background (end)
-\chapter{Literature Review} 
+\chapter{Background and Previous Work} % (fold)
+As was stated in the introduction, computational offload is not a novel concept per say. There are several applications available to smart phone users today that make use of computational offloading to provide a more rich experience to the end user. Shazam was one such application, where a user records a section of music and the app sends the recording to a server for identification. [ADD SOME MORE EXAMPLES]
 
-% (fold)
-\label{chap:literature_review}
+Cuervo et al \cite{Cuervo:2010}, presented their framework MAUI, which allowed for runtime offloading of mobile computation from the windows platform. The MAUI framework sought to maximize battery life by determining at runtime which problems could be executed remotely on a parallel runtime. However their approach had some flaws, their decision to allow the developer to use regular primitive data types and rely on reflection and serialization to ship their objects to the remote server while desirable for the developer in terms of ease of use, the use of reflection and serialization incur processor overheads which contribute to the power cost of the object transmission.
+
+% chapter background (end)
+\label{chap:background}
+
 
 % chapter literature_review (end)
 \chapter{Design and Modelling} 
